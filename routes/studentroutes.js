@@ -1,17 +1,12 @@
-const express=require('express')
-const router=express.Router();
-const studentcontroller=require('../controllers/studentcontroller')
-router.get("/",studentcontroller.allstudents);
-router.get("/:id",(req,res)=>{
-    
-    res.send(`Student Id:${req.params.id}`)
-}
-)
-router.post("/",studentcontroller.addstudent)
-router.patch("/:id",(req,res)=>{
-    res.send(`Student ${req.params.id} details updated`)
-})
-router.delete("/:id",(req,res)=>{
-    res.send(`Student ${req.params.id} Deleted Successfully`)
-})
-module.exports=router;
+
+const express = require('express');
+const router = express.Router();
+
+const studentController = require('../controllers/studentcontroller');
+
+router.post('/', studentController.createStudent);
+router.get('/', studentController.getStudents);
+router.patch('/', studentController.updateStudent);
+router.delete('/', studentController.deleteStudent);
+
+module.exports = router;

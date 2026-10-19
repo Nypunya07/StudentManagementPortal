@@ -1,22 +1,23 @@
-const express=require("express");
-const router=express.Router();
-router.get("/",(req,res)=>{
-    res.send("Attendance of all students");
-});
-router.get("/:id",(req,res)=>{
-    res.send(`Attendance of student ${req.params.id}`);
-});
-router.post("/:id",(req,res)=>{
-    const attendance=req.body;
-    console.log(attendance);
 
-    res.status(201).json({
-        message: `Attendance record of student ${req.params.id} has been saved`,
-        data:attendance
-    });
-        
-});
-router.patch("/:id",(req,res)=>{
-    res.send(`Attendance record of student ${req.params.id} updated`);
-});
-module.exports=router;
+const express = require('express');
+const router = express.Router();
+
+const attendanceController =
+    require('../controllers/attendancecontroller');
+
+router.get(
+    '/:class/:rollNo',
+    attendanceController.getAttendance
+);
+
+router.post(
+    '/:class/:rollNo',
+    attendanceController.addAttendance
+);
+
+router.patch(
+    '/record/:id',
+    attendanceController.updateAttendance
+);
+
+module.exports = router;
